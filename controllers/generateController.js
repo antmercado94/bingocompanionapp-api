@@ -15,7 +15,10 @@ module.exports.generate_cards = async (req, res) => {
 			});
 
 		const host = req.headers.host;
-		const link = `http://${host}/api/generated/${quantity}`; // api url proxy
+		const link =
+			process.env.NODE_ENV !== 'production'
+				? `http://${host}/api/generated/${quantity}`
+				: `https://${host}/generated/${quantity}`;
 
 		res.status(200).json({ url: link });
 	} catch (err) {

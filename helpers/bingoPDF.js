@@ -25,9 +25,9 @@ const bingoPDF = (dataCallback, endCallback, quantity) => {
 			{
 				type: 'rect',
 				x: 40,
-				y: 144.5,
+				y: 152,
 				w: 532,
-				h: 586.8,
+				h: 578,
 				r: 10,
 				lineColor,
 				lineWidth,

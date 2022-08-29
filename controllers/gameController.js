@@ -13,8 +13,24 @@ module.exports.get_cells = (req, res) => {
 	let cells = [],
 		i = 1;
 
+	/** Define column ranges (75-Ball) */
+	let range0 = [],
+		range1 = [],
+		range2 = [],
+		range3 = [],
+		range4 = [];
+
+	for (let i = 1; i <= 75; i++) {
+		if (i <= 15) range0.push(i);
+		if (i > 15 && i <= 30) range1.push(i);
+		if (i > 30 && i <= 45) range2.push(i);
+		if (i > 45 && i <= 60) range3.push(i);
+		if (i > 60 && i <= 75) range4.push(i);
+	}
+
 	while (i <= 25) {
-		let column = '';
+		let column = '',
+			rangeVal;
 
 		/** five bingo columns: 5x5 grid layout */
 		const columnB = [1, 6, 11, 16, 21],
@@ -36,12 +52,63 @@ module.exports.get_cells = (req, res) => {
 			column = 4; // O
 		}
 
+		/** Column cell value */
+		switch (column) {
+			case 0: // B
+				rangeVal = range0[Math.floor(Math.random() * range0.length)];
+				/** remove from array */
+				for (let i = 0; i < range0.length; i++) {
+					if (range0[i] === rangeVal) {
+						range0.splice(i, 1);
+					}
+				}
+				break;
+			case 1: // I
+				rangeVal = range1[Math.floor(Math.random() * range1.length)];
+				/** remove from array */
+				for (let i = 0; i < range1.length; i++) {
+					if (range1[i] === rangeVal) {
+						range1.splice(i, 1);
+					}
+				}
+				break;
+			case 2: // N
+				rangeVal = range2[Math.floor(Math.random() * range2.length)];
+				/** remove from array */
+				for (let i = 0; i < range2.length; i++) {
+					if (range2[i] === rangeVal) {
+						range2.splice(i, 1);
+					}
+				}
+				break;
+			case 3: // G
+				rangeVal = range3[Math.floor(Math.random() * range3.length)];
+				/** remove from array */
+				for (let i = 0; i < range3.length; i++) {
+					if (range3[i] === rangeVal) {
+						range3.splice(i, 1);
+					}
+				}
+				break;
+			case 4: // O
+				rangeVal = range4[Math.floor(Math.random() * range4.length)];
+				/** remove from array */
+				for (let i = 0; i < range4.length; i++) {
+					if (range4[i] === rangeVal) {
+						range4.splice(i, 1);
+					}
+				}
+				break;
+			default:
+				break;
+		}
+
 		/** populate array */
 		cells = [
 			...cells,
 			{
 				column,
-				value: i === 13 ? 'free' : _.random(1, 20), // 1-20
+				value: i === 13 ? 'free' : rangeVal,
 				match: false,
 			},
 		];
@@ -51,21 +118,23 @@ module.exports.get_cells = (req, res) => {
 	res.json({ cells });
 };
 
-/* return 5 arrays with numbers 1-20 */
+/* return 5 arrays containing callable numbers */
 module.exports.get_numbers = (req, res) => {
 	let columnsSet = [[], [], [], [], []],
-		numberSet = [
-			1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-		];
+		numberSet = [];
 
-	/** populate each array with numbers 1-20 */
+	for (let i = 1; i <= 75; i++) {
+		numberSet.push(i);
+	}
+
+	/** populate each array in accordance with 75-Ball Bingo column ranges */
 	let i = 1;
 	while (i <= numberSet.length) {
-		columnsSet[0].push(i);
-		columnsSet[1].push(i);
-		columnsSet[2].push(i);
-		columnsSet[3].push(i);
-		columnsSet[4].push(i);
+		if (i <= 15) columnsSet[0].push(i);
+		if (i > 15 && i <= 30) columnsSet[1].push(i);
+		if (i > 30 && i <= 45) columnsSet[2].push(i);
+		if (i > 45 && i <= 60) columnsSet[3].push(i);
+		if (i > 60 && i <= 75) columnsSet[4].push(i);
 		i++;
 	}
 

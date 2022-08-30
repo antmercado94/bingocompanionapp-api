@@ -18,14 +18,28 @@ module.exports.check_user = async (req, res) => {
 			reqToken,
 			process.env.ACCESS_TOKEN_SECRET
 		);
-		if (!isVerified)
+		if (!isVerified) {
+			res.header(
+				'Cache-Control',
+				'private, no-cache, no-store, must-revalidate'
+			);
+			res.header('Expires', '-1');
+			res.header('Pragma', 'no-cache');
 			return res.status(401).clearCookie('jwt').json({ isVerified: false });
+		}
 
 		/** check user */
 		const userId = token.id;
 		const user = await User.findById(userId);
-		if (!user)
+		if (!user) {
+			res.header(
+				'Cache-Control',
+				'private, no-cache, no-store, must-revalidate'
+			);
+			res.header('Expires', '-1');
+			res.header('Pragma', 'no-cache');
 			return res.status(404).clearCookie('jwt').json({ isUser: false });
+		}
 
 		res.status(200).json({ isUser: true });
 	} catch (err) {
@@ -37,6 +51,9 @@ module.exports.check_user = async (req, res) => {
 
 /* logout user */
 module.exports.logout_get = (req, res) => {
+	res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+	res.header('Expires', '-1');
+	res.header('Pragma', 'no-cache');
 	/** clear auth cookie */
 	res.status(200).clearCookie('jwt').json({ isCleared: true });
 };

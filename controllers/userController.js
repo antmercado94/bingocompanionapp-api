@@ -287,6 +287,9 @@ module.exports.delete_user = async (req, res) => {
 		const { deletedCount } = await User.deleteOne({ _id: user._id });
 		if (deletedCount !== 1) throw Error({ userDeleted: false });
 
+		res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+		res.header('Expires', '-1');
+		res.header('Pragma', 'no-cache');
 		res.status(200).clearCookie('jwt').json({ userDeleted: true });
 	} catch (err) {
 		res

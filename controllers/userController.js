@@ -121,7 +121,10 @@ module.exports.resetpw_post = async (req, res) => {
 
 		/** send reset email */
 		const host = req.headers.host;
-		const link = `http://${host}/resetpw/${user.id}/${token}`;
+		const link =
+			process.env.NODE_ENV !== 'production'
+				? `http://${host}/resetpw/${user.id}/${token}`
+				: `https://${process.env.CLIENT_HOST}/resetpw/${user.id}/${token}`;
 		const result = await sendMail(user.email, link);
 		if (result.error)
 			return res

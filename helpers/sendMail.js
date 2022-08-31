@@ -48,7 +48,6 @@ const sendMail = async (to, url) => {
 
 		return result;
 	} catch (err) {
-		console.log(err.message);
 		return { error: err.message };
 	}
 };

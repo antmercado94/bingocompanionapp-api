@@ -113,7 +113,7 @@ module.exports.resetpw_post = async (req, res) => {
 				.json({ errors: { email: 'Email could not be found.' } });
 
 		/** create unique secret with user's pw */
-		const secret = process.env.RESET_TOKEN_SECRET + user.password; // Note: secret made with crypto.randomBytes(32).toString("hex")
+		const secret = process.env.RESET_TOKEN_SECRET + user.password;
 
 		/** create token */
 		const payload = { id: user._id, email: user.email },

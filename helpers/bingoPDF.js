@@ -24,9 +24,9 @@ const bingoPDF = (dataCallback, endCallback, quantity) => {
 		canvas: [
 			{
 				type: 'rect',
-				x: 41,
+				x: 40,
 				y: 152,
-				w: 531,
+				w: 532,
 				h: 578,
 				r: 10,
 				lineColor,
@@ -47,7 +47,7 @@ const bingoPDF = (dataCallback, endCallback, quantity) => {
 		images: null,
 		pageSize: 'LETTER',
 		pageOrientation: 'portrait',
-		pageMargins: [40.5, 45, 40, 45],
+		pageMargins: [40, 45, 40, 45],
 	};
 
 	/* loop quantity */

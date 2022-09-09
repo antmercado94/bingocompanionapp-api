@@ -37,18 +37,14 @@ module.exports.generated_pdf = async (req, res) => {
 			return res.status(400).json({
 				errors: { generate: 'Please enter a valid number from 1-50' },
 			});
-		let data = [];
+
+		const stream = res.writeHead(200, {
+			'Content-Type': 'application/pdf',
+			'Content-Disposition': `inline`,
+		});
 		bingoPDF(
-			(chunk) => data.push(chunk),
-			() => {
-				data = Buffer.concat(data);
-				res.writeHead(200, {
-					'Content-Type': 'application/pdf',
-					'Content-Disposition': 'attachment; filename=working-test.pdf',
-					'Content-Length': data.length,
-				});
-				res.end(data);
-			},
+			(chunk) => stream.write(chunk),
+			() => stream.end(),
 			quantity
 		);
 	} catch (err) {

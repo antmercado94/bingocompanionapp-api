@@ -44,7 +44,7 @@ module.exports.generated_pdf = async (req, res) => {
 				data = Buffer.concat(data);
 				res.writeHead(200, {
 					'Content-Type': 'application/pdf',
-					'Content-Disposition': 'inline',
+					'Content-Disposition': 'attachment; filename=working-test.pdf',
 					'Content-Length': data.length,
 				});
 				res.end(data);

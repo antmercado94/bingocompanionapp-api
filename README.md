@@ -22,7 +22,7 @@ RESTful API served with [Node.js](https://nodejs.org/en/) and powered by [Expres
 
 [MongoDB](https://www.mongodb.com/) is used as the database for this project and will require its [URI connection string](https://www.mongodb.com/docs/manual/reference/connection-string/) to be set as an [env](#environment-variables) variable. **The server will not start until a database connection is established**.
 
-[Gmail](https://www.google.com/gmail/about/) auth is used for nodemailer [SMTP transport](https://nodemailer.com/smtp/) config to simply send a password reset link to a specified email. This requires having an account with google and obtaining an app password that should be set as an [env](#environment-variables) variable. See this guide [here](https://medium.com/@y.mehnati_49486/how-to-send-an-email-from-your-gmail-account-with-nodemailer-837bf09a7628) for more details.
+[Gmail](https://www.google.com/gmail/about/) auth is used for nodemailer [SMTP transport](https://nodemailer.com/smtp/) config to simply send a password reset link to a specified email. This requires having a Google account with two-factor authorization and obtaining an app password which should be set as an [env](#environment-variables) variable. See this guide [here](https://medium.com/@y.mehnati_49486/how-to-send-an-email-from-your-gmail-account-with-nodemailer-837bf09a7628) for more details.
 
 ## **Installation and setup**
 

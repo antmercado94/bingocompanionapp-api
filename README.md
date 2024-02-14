@@ -10,7 +10,7 @@ This project was developed for the purposes of being a part of my web portfolio.
 - [Environment Variables](#environment-variables)
   - [MongoDB](#mongodb)
   - [Secrets](#secrets)
-  - [SendGrid](#sendgrid)
+  - [Google App Password](#google-app-password)
   - [Email Template](#email-template)
 - [License](#license)
 
@@ -22,7 +22,7 @@ RESTful API served with [Node.js](https://nodejs.org/en/) and powered by [Expres
 
 [MongoDB](https://www.mongodb.com/) is used as the database for this project and will require its [URI connection string](https://www.mongodb.com/docs/manual/reference/connection-string/) to be set as an [env](#environment-variables) variable. **The server will not start until a database connection is established**.
 
-[SendGrid](https://sendgrid.com/) API is a cloud-based SMTP provider that is used to send email from a specified email host. This requires having an account with SendGrid and obtaining an API key that should be set as an [env](#environment-variables) variable.
+[Gmail](https://www.google.com/gmail/about/) auth is used for nodemailer [SMTP transport](https://nodemailer.com/smtp/) config to simply send a password reset link to a specified email. This requires having an account with google and obtaining an app password that should be set as an [env](#environment-variables) variable. See this guide [here](https://medium.com/@y.mehnati_49486/how-to-send-an-email-from-your-gmail-account-with-nodemailer-837bf09a7628) for more details.
 
 ## **Installation and setup**
 
@@ -58,9 +58,9 @@ Several functionalities within this project require the use of environment varia
 - `ACCESS_TOKEN_SECRET=YOURSECRET`
 - `RESET_TOKEN_SECRET=YOURSECRET`
 
-#### **SendGrid**
+#### **Google App Password**
 
-- `SENDGRID_API_KEY=YOURAPIKEY`
+- `ADMIN_APP_PW=YOURPASSWORD`
 
 #### **Email Template**
 

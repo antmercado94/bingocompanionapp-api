@@ -1,24 +1,28 @@
 /**
- * Send mail using SendGrid
+ * Send mail using Nodemailer
  */
 
 const nodemailer = require('nodemailer');
-const nodemailerSendgrid = require('nodemailer-sendgrid');
 const Email = require('email-templates');
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 
-const { ADMIN_EMAIL } = process.env;
+const { ADMIN_EMAIL, ADMIN_APP_PW } = process.env;
 
 const sendMail = async (to, url) => {
 	try {
-		const transporter = nodemailer.createTransport(
-			nodemailerSendgrid({
-				apiKey: process.env.SENDGRID_API_KEY,
-			})
-		);
+		const transporter = nodemailer.createTransport({
+			service: 'Gmail',
+			host: 'smtp.gmail.com',
+			port: 465,
+			secure: true,
+			auth: {
+				user: ADMIN_EMAIL,
+				pass: ADMIN_APP_PW,
+			},
+		});
 
 		const email = new Email({
 			message: {
